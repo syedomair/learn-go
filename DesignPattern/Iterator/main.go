@@ -5,6 +5,7 @@ import "fmt"
 type iterator interface {
 	hasNext() bool
 	getNext() *user
+	count() int
 }
 
 /*
@@ -50,6 +51,9 @@ func (u *userIterator) getNext() *user {
 	return nil
 }
 
+func (u *userIterator) count() int {
+	return len(u.users)
+}
 func main() {
 
 	user1 := &user{
@@ -67,6 +71,7 @@ func main() {
 
 	iterator := userCollection.createIterator()
 
+	fmt.Printf("User Count:%v\n", iterator.count())
 	for iterator.hasNext() {
 		user := iterator.getNext()
 		fmt.Printf("User is %+v\n", user)
